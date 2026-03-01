@@ -22,28 +22,31 @@ export async function POST(req: Request) {
       response_format: { type: "json_object" },
       messages: [
         {
-          role: "system",
-          content:
-            "あなたは日本語で、娯楽目的の『雰囲気キャラ診断』を作ります。画像から断定的に性格や内面を決めつけず、見た目（表情・雰囲気・服装など）から連想した“フィクションのキャラクター像”として表現してください。出力は必ずJSONのみ。",
-        },
-        {
-          role: "user",
-          content: [
-            {
-              type: "text",
-              text: `
-次のJSON形式で“必ず”返してください（Markdown禁止、文章のみ禁止）。
+        role: "system",
+        content: `あなたは熟練の顔相占い師です。画像から「太陽」「月」「風」のいずれか1つのタイプを厳密に判定してください。
+回答は必ず以下のJSON形式で返してください。
 
 {
-  "typeName": "例：分析タイプ / 癒しタイプ など",
-  "tagLine": "短い一言（日本語）",
-  "description": "2〜4文（日本語）。断定しすぎず『〜な雰囲気』『〜に見える』などで表現。",
-  "keywords": ["短い単語を3〜5個"],
-  "strengths": ["箇条書き3つ（日本語）"],
-  "loveTips": ["恋愛のコツ3つ（日本語）"]
+  "typeName": "太陽のハッピー・サンフラワー顔（または月か風の名称）",
+  "tagLine": "一言キャッチコピー",
+  "description": "性格や雰囲気の解説（2〜4文）",
+  "keywords": ["キーワード1", "キーワード2", "キーワード3"],
+  "strengths": ["強み1", "強み2", "強み3"],
+  "loveTips": ["恋愛のコツ1", "恋愛のコツ2", "恋愛のコツ3"]
 }
-`,
-            },
+
+※判定のヒント：
+- 太陽：笑顔、エネルギッシュ、温かい
+- 月：穏やか、知的、ミステリアス
+- 風：爽やか、自由、軽やか`
+      },
+      {
+        role: "user",
+        content: [
+          {
+            type: "text",
+            text: "この人物の顔を分析して、JSON形式で結果を返してください。"
+          },
             {
               type: "image_url",
               image_url: { url: imageBase64 },
