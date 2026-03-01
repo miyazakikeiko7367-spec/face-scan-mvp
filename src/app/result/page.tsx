@@ -94,7 +94,7 @@ function ResultContent() {
     { id: 'marriage', title: '💖 【運命の恋】惹きつける相手', free: result.marriage.free, headers: result.marriage.headers, paid: result.marriage.paid, price: 300, isPaid: isPaidMarriage },
     { id: 'career', title: '🚀 【天職判明】才能を爆発させる職業', free: result.career.free, headers: result.career.headers, paid: result.career.paid, price: 300, isPaid: isPaidCareer },
     { id: 'money', title: '💰 【臨時収入】金運を引き寄せる顔', free: result.money.free, headers: result.money.headers, paid: result.money.paid, price: 300, isPaid: isPaidMoney },
-    { id: 'reunion', title: '🌹 【最終手段】ふたりの縁を戻すには', free: result.reunion.free, headers: result.reunion.headers, paid: result.reunion.paid, price: 300, isPaid: isPaidReunion },
+    { id: 'reunion', title: '🌹 【復縁】ふたりの縁を戻すには', free: result.reunion.free, headers: result.reunion.headers, paid: result.reunion.paid, price: 300, isPaid: isPaidReunion },
     { id: 'counseling', title: '💎 特別個別鑑定カウンセリング', 
       intro: `AI診断の結果を超えた、プロによる1対1の本格鑑定。
 
@@ -144,7 +144,7 @@ function ResultContent() {
                       <div className="pt-2 text-center">
                         <p className="text-[13px] text-gray-600 mb-8 leading-relaxed font-medium italic">※こちらは外部サイトでの個別診断となります。</p>
                         <p className="text-[14px] text-gray-700 mb-8 leading-relaxed font-bold bg-purple-50 p-6 rounded-2xl border border-purple-100 whitespace-pre-wrap">{item.intro}</p>
-                        <button onClick={() => handlePayment(item.id)} className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-black py-5 rounded-full shadow-xl transition-all active:scale-95 text-lg">詳細をチェックする ✨</button>
+                        <button onClick={() => window.open('https://coconala.com/services/3707759?ref=profile_top_service', '_blank')} className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-black py-5 rounded-full shadow-xl transition-all active:scale-95 text-lg">詳細をチェックする ✨</button>
                         <p className="mt-4 text-[11px] text-gray-400 font-bold tracking-widest uppercase text-center">鑑定料：¥2,500（ココナラへ移動）</p>
                       </div>
                     ) : (
