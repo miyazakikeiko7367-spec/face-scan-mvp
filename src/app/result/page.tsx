@@ -120,6 +120,34 @@ function ResultContent() {
             <p className="text-sm text-gray-600 leading-relaxed font-medium whitespace-pre-wrap">{result.description}</p>
           </div>
         </div>
+        <div className="flex justify-center gap-4 mb-10">
+  {/* X */}
+  <button 
+    onClick={() => window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent('AI顔診断で運勢を占いました！')}&url=${encodeURIComponent(window.location.href)}`, '_blank')}
+    className="w-12 h-12 bg-black rounded-full flex items-center justify-center shadow-lg"
+  >
+    <span className="text-white text-xs font-bold">X</span>
+  </button>
+
+  {/* LINE */}
+  <button 
+    onClick={() => window.open(`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(window.location.href)}`, '_blank')}
+    className="w-12 h-12 bg-[#06C755] rounded-full flex items-center justify-center shadow-lg"
+  >
+    <span className="text-white text-xs font-bold">LINE</span>
+  </button>
+
+  {/* Instagram (コピー) */}
+  <button 
+    onClick={() => {
+      navigator.clipboard.writeText(window.location.href);
+      alert('URLをコピーしました！ストーリーズに貼ってね✨');
+    }}
+    className="w-12 h-12 bg-gradient-to-tr from-[#FFDC80] via-[#E1306C] to-[#833AB4] rounded-full flex items-center justify-center shadow-lg"
+  >
+    <span className="text-white text-[10px] font-bold">Insta</span>
+  </button>
+</div>
 
         <div className="space-y-12">
           {menuItems.map((item: any) => (
