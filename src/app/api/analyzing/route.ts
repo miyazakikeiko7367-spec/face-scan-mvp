@@ -17,28 +17,32 @@ export async function POST(req: Request) {
     }
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      // ここが重要：JSON以外を返せないようにする
+        model: "gpt-4o-mini",
+        temperature: 0.8, 
       response_format: { type: "json_object" },
       messages: [
         {
         role: "system",
-        content: `あなたは熟練の顔相占い師です。画像から「太陽」「月」「風」のいずれか1つのタイプを厳密に判定してください。
-回答は必ず以下のJSON形式で返してください。
+        content: `あなたは、顔の造形からその人の本質を見抜く、非常に厳格なプロの観相師です。
+分析結果は、以下の3タイプのうち【最も当てはまるもの1つ】を、偏りがないよう厳密に選んでください。
 
+■ 判定の絶対ルール：
+1. 太陽（Happy Sunflower）：満面の笑顔、非常に明るい表情、温かみのあるエネルギッシュな顔立ち。
+2. 月（Mystic Moon）：穏やかで涼しげな目元、知的な雰囲気、静寂やミステリアスさを感じる真顔。
+3. 風（Free Breeze）：爽やかで軽やか、少し崩した笑顔や自由奔放でつかみどころのない表情。
+
+【重要】
+毎回「太陽」を出すのは素人です。画像に「静かさ」があれば月、「軽やかさ」があれば風を積極的に選んでください。
+
+回答は必ず以下のJSON形式で返してください：
 {
-  "typeName": "太陽のハッピー・サンフラワー顔（または月か風の名称）",
-  "tagLine": "一言キャッチコピー",
-  "description": "性格や雰囲気の解説（2〜4文）",
-  "keywords": ["キーワード1", "キーワード2", "キーワード3"],
-  "strengths": ["強み1", "強み2", "強み3"],
-  "loveTips": ["恋愛のコツ1", "恋愛のコツ2", "恋愛のコツ3"]
-}
-
-※判定のヒント：
-- 太陽：笑顔、エネルギッシュ、温かい
-- 月：穏やか、知的、ミステリアス
-- 風：爽やか、自由、軽やか`
+"typeName": "判定されたタイプ名（太陽/月/風のいずれか）",
+"tagLine": "そのタイプを象徴するキャッチコピー",
+"description": "人相学に基づいた性格の詳しい解説（300円の価値を感じさせる、心に響く長文で）",
+"keywords": ["特徴1", "特徴2", "特徴3"],
+"strengths": ["強み1", "強み2", "強み3"],
+"loveTips": ["アドバイス1", "アドバイス2", "アドバイス3"]
+}`
       },
       {
         role: "user",
@@ -47,14 +51,13 @@ export async function POST(req: Request) {
             type: "text",
             text: "この人物の顔を分析して、JSON形式で結果を返してください。"
           },
-            {
-              type: "image_url",
-              image_url: { url: imageBase64 },
-            },
-          ],
-        },
+          {
+            type: "image_url",
+            image_url: { url: imageBase64 },
+          },
+        ],
+      },
       ],
-      temperature: 0.8,
     });
 
     const text = completion.choices[0].message.content ?? "{}";
